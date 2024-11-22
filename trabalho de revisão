@@ -1,0 +1,108 @@
+#Gerando e exibindo a tabela de multiplicação de 5 a 15 em Python
+
+start = 5
+end = 15
+
+for i in range(start, end + 1):
+    for j in range(start, end + 1):
+        print(f"{i} x {j} = {i * j}")
+    print()  
+
+# Desenvolver um programa para determinar o número de dígitos de um número de CPF informado;
+while True:
+    x = input('Digite os 11 digitos do seu CPF: ')
+
+    if len(x) == 11:
+        print('O número do CPF')
+        break
+    else:
+        print('O numero digitado não possui 11 digitos, tente novamente')
+
+# Programa para calcular a série de Fibonacci até um número informado pelo usuário
+
+def fibonacci_series(n):
+    fib_series = []
+    a, b = 0, 1  # Valores iniciais F(0) e F(1)
+    for _ in range(n):
+        fib_series.append(a)
+        a, b = b, a + b  
+    return fib_series
+
+num = 9  
+if num <= 0:
+    print("Por favor, insira um número inteiro positivo.")
+else:
+    result = fibonacci_series(num)
+    print("A série de Fibonacci é:", ", ".join(map(str, result)))
+
+#Faça um programa que calcule o retorno de um investimento financeiro
+fazendo as contas mês a mês, sem usar a fórmula de juros compostos
+
+#○ O usuário deve informar quanto será investido por mês e qual será a taxa de juros
+mensal
+
+#○ O programa deve informar o saldo do investimento após um ano (soma das aplicações
+mês a mês considerando os juros compostos), e perguntar ao usuário se ele deseja que
+seja calculado o ano seguinte, sucessivamente
+
+#○ Por exemplo, caso o usuário deseje investir R$ 100,00 por mês, e tenha uma taxa de
+juros de 1% ao mês, o programa forneceria a seguinte saída:
+
+def calcular_investimento():
+    print("Bem-vindo ao simulador de investimento!")
+
+    investimento_mensal = float(input("Informe o valor a ser investido mensalmente (R$): "))
+    taxa_juros_mensal = float(input("Informe a taxa de juros mensal (%): ")) / 100
+
+    saldo_total = 0
+    ano = 1
+
+    while True:
+        print(f"\nCalculando o saldo após {ano} ano(s)...")
+        for mes in range(1, 13):
+            saldo_total += investimento_mensal
+            saldo_total += saldo_total * taxa_juros_mensal
+
+        print(f"Saldo do investimento após {ano} ano(s): R$ {saldo_total:.2f}")
+        continuar = input("Deseja processar mais um ano? (S/N): ").strip().upper()
+
+        if continuar != 'S':
+            print("Simulação encerrada. Obrigado por usar o simulador!")
+            break
+
+        ano += 1
+
+calcular_investimento()
+
+# Faça um programa em Python que calcule o valor de Pi, utilizando a fórmula de Leibniz:
+n = int(input("Digite o número de termos: "))
+
+pi = 0
+for i in range(n):
+    pi += (-1) ** i / (2 * i + 1)
+
+pi *= 4
+print("Aproximação de Pi:", pi)
+
+# Desenvolva um programa para validar o número de CPF informado pelo usuário segundo o algoritmo de verificação usado atualmente nos diferentes sistemas que requerem o CPF das pessoas:
+
+def validar_cpf(cpf):
+    cpf = ''.join(filter(str.isdigit, cpf))
+
+    if len(cpf) != 11 or cpf == cpf[0] * 11:
+        return False
+
+    def calcular_digito(cpf, peso_inicial):
+        soma = sum(int(cpf[i]) * (peso_inicial - i) for i in range(len(cpf)))
+        resto = soma % 11
+        return 0 if resto < 2 else 11 - resto
+
+    primeiro_digito = calcular_digito(cpf[:9], 10)
+    segundo_digito = calcular_digito(cpf[:10], 11)
+
+    return cpf[9] == str(primeiro_digito) and cpf[10] == str(segundo_digito)
+
+cpf_usuario = input("Informe o CPF (apenas números ou com pontuação): ").strip()
+
+print("CPF válido!" if validar_cpf(cpf_usuario) else "CPF inválido!")
+
